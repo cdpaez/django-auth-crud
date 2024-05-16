@@ -1,0 +1,42 @@
+<!-- heredar lo que viene del html base.html-->
+{% extends 'base.html' %}
+
+{% block content %}
+
+<main class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <h1 class="text-secondary">Detalles de las tareas</h1>
+    
+            {{error}}
+            
+            <form method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button class="btn btn-primary">
+                    Actualizar
+                </button>
+            </form>
+
+            <div class="mt-5 d-flex">
+                            
+                <form method="POST" action="{% url 'complete_task' task.id %}">
+                    {% csrf_token %}
+                    <button class="btn btn-secondary">
+                        Completa
+                    </button>
+                </form>
+                
+                <form method="POST" action="{% url 'delete_task' task.id %}">
+                    {% csrf_token %}
+                    <button class="btn btn-danger">
+                        Eliminar
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
